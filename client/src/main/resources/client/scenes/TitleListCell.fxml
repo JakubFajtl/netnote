@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.TitleListCellCtrl">
+   <children>
+      <Label fx:id="collectionLabel" prefHeight="16.0" prefWidth="165.5" style="-fx-background-color: #717171;" text="collectionLabel" textFill="WHITE">
+         <font>
+            <Font size="11.0" />
+         </font>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </Label>
+      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="164.0" spacing="3.0">
+          <stylesheets> style.css </stylesheets>
+          <children>
+            <StackPane prefHeight="25.0" prefWidth="121.0">
+               <children>
+                    <TextField fx:id="titleTextField" prefHeight="25.0" prefWidth="100.0" visible="false" />
+                    <Label fx:id="titleLabel" prefHeight="25.0" prefWidth="100.0" text="titleLabel" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="21.0" prefWidth="32.0">
+               <children>
+                    <Button fx:id="saveButton" alignment="CENTER" mnemonicParsing="false" onAction="#onSaveClicked" prefHeight="21.0" prefWidth="29.0" textAlignment="CENTER" visible="false" StackPane.alignment="CENTER">
+                     <font>
+                        <Font size="8.0" />
+                     </font>
+                     <graphic>
+                        <FontIcon iconLiteral="fas-check" iconSize="15" />
+                     </graphic>
+                  </Button>
+                    <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEditClicked" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: transparent;">
+                     <font>
+                        <Font size="5.0" />
+                     </font>
+                  </Button>
+               </children>
+            </StackPane>
+          </children>
+         <padding>
+            <Insets bottom="3.0" left="3.0" right="1.0" top="3.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox onKeyPressed="#handleKeyPress" prefHeight="579.0" prefWidth="908.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.NotesHomeCtrl">
+    <stylesheets> style.css </stylesheets>
+    <MenuBar VBox.vgrow="NEVER">
+        <Menu fx:id="notesActionsMenu" text="Actions on a note (Alt+A)">
+            <MenuItem fx:id="createSC" onAction="#createNoteClicked" text="%Item.createSC" />
+            <MenuItem fx:id="titleSC" onAction="#enterTitleEditingMode" text="%Item.titleSC" />
+            <MenuItem fx:id="editContentSC" onAction="#focusOnContent" text="%Item.editContentSC" />
+            <MenuItem fx:id="deleteSC" onAction="#deleteNoteClicked" text="%Item.deleteSC" />
+        </Menu>
+        <Menu fx:id="filterMenu" text="Filtering/searching (Alt+F)">
+            <MenuItem fx:id="searchbarSC" onAction="#focusOnSearch" text="%Item.selectSearchbarSC" />
+            <MenuItem fx:id="searchSC" onAction="#queryNotesClicked" text="%Item.performSearchSC" />
+        </Menu>
+        <Menu fx:id="otherShortcutsMenu" text="Extra actions (Alt+X)">
+            <MenuItem fx:id="listSC" onAction="#focusOnList" text="%Item.moveToListSC" />
+            <MenuItem fx:id="collectionSC" onAction="#editCollections" text="%Item.openCollectionPopupSC" />
+            <MenuItem fx:id="collectionDropdownSC" onAction="#focusOnCollectionsDropdown" text="%Item.openCollectionDropdownSC" />
+            <MenuItem fx:id="refreshSC" onAction="#refreshApp" text="%Item.refreshSC" />
+            <MenuItem fx:id="quitSC" onAction="#closeApp" text="%Item.quitAppSC" />
+        </Menu>
+    </MenuBar>
+   <HBox maxHeight="35.0" minHeight="35.0" prefHeight="35.0" VBox.vgrow="NEVER">
+      <children>
+            <Button fx:id="searchButton" minWidth="37.0" mnemonicParsing="false" onAction="#queryNotesClicked" prefHeight="25.0" prefWidth="37.0" style="-fx-background-color: #b8b8b8;" HBox.hgrow="NEVER">
+            <HBox.margin>
+               <Insets right="5.0" />
+            </HBox.margin>
+            <graphic>
+               <FontIcon iconLiteral="fas-search" iconSize="17" />
+            </graphic></Button>
+            <TextField fx:id="textFieldNotesSearch" minWidth="60.0" HBox.hgrow="ALWAYS">
+            <HBox.margin>
+               <Insets right="5.0" />
+            </HBox.margin></TextField>
+         <SplitMenuButton fx:id="languageMenuButton" minWidth="36.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" HBox.hgrow="NEVER">
+           <items>
+             <MenuItem fx:id="enMenuItem" mnemonicParsing="false" onAction="#setEN" />
+             <MenuItem fx:id="nlMenuItem" mnemonicParsing="false" onAction="#setNL" />
+               <MenuItem fx:id="deMenuItem" mnemonicParsing="false" onAction="#setDE" />
+               <MenuItem fx:id="friMenuItem" mnemonicParsing="false" onAction="#setFrisian" />
+               <MenuItem fx:id="catMenuItem" mnemonicParsing="false" onAction="#setCat" />
+           </items>
+            <HBox.margin>
+               <Insets right="5.0" />
+            </HBox.margin>
+         </SplitMenuButton>
+            <ChoiceBox fx:id="collectionChoice" minWidth="80.0" prefWidth="140.0" style="-fx-background-color: #b8b8b8;" HBox.hgrow="NEVER" />
+      </children>
+      <padding>
+         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+   </HBox>
+   <Separator prefWidth="200.0" />
+    <AnchorPane minHeight="120.0" VBox.vgrow="ALWAYS">
+        <children>
+            <GridPane prefHeight="417.6" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="175.0" prefWidth="175.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <children>
+               <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <children>
+                     <Button fx:id="collectionButton" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#editCollections" prefHeight="25.0" prefWidth="87.0" style="-fx-background-color: #b8b8b8;" text="%Item.collections" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                     <ListView fx:id="listViewCollectionsList" layoutX="-77.0" layoutY="83.0" prefHeight="446.0" prefWidth="120.0" style="-fx-background-color: #d7d7d7;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
+                        <tooltip>
+                           <Tooltip text="Hold Ctrl to select multiple collections" />
+                        </tooltip></ListView>
+                     <Button fx:id="selectAllButton" layoutX="-4.666666666666667" layoutY="36.0" mnemonicParsing="false" onAction="#selectAllButtonClick" prefHeight="25.0" prefWidth="133.0" style="-fx-background-color: transparent;" text="Select all" AnchorPane.leftAnchor="-5.0" AnchorPane.rightAnchor="-8.0" AnchorPane.topAnchor="36.0" />
+                  </children>
+               </AnchorPane>
+               <Separator orientation="VERTICAL" GridPane.columnIndex="1" />
+                    <AnchorPane minWidth="173.0" GridPane.columnIndex="1">
+                        <children>
+                            <ListView fx:id="listViewNotesList" layoutX="1.3333333333333335" layoutY="1.3333333333333333" prefHeight="469.0" prefWidth="176.0" style="-fx-background-color: #e6e6e6;" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+                            <Button fx:id="createBtn" layoutX="14.0" layoutY="477.0" mnemonicParsing="false" onAction="#createNoteClicked" prefHeight="25.0" prefWidth="43.0" style="-fx-background-color: #b8b8b8;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="14.0">
+                        <graphic>
+                           <FontIcon iconLiteral="fas-plus" iconSize="20" text="" wrappingWidth="17.1665620803833" />
+                        </graphic>
+                            </Button>
+                            <Button fx:id="removeButton" layoutX="60.0" layoutY="477.0" mnemonicParsing="false" onAction="#deleteNoteClicked" prefHeight="25.0" prefWidth="43.0" style="-fx-background-color: #b8b8b8;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="64.0">
+                        <graphic>
+                           <FontIcon iconLiteral="far-trash-alt" iconSize="20" />
+                        </graphic></Button>
+                            <Button fx:id="refreshButton" layoutX="116.0" layoutY="477.0" mnemonicParsing="false" onAction="#refreshApp" prefHeight="25.0" prefWidth="43.0" style="-fx-background-color: #b8b8b8;" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="14.0">
+                        <graphic>
+                           <FontIcon iconLiteral="fas-redo-alt" iconSize="20" wrappingWidth="21.083372116088867" />
+                        </graphic></Button>
+                     <Label fx:id="labelNoNotes" alignment="CENTER" contentDisplay="RIGHT" layoutY="-3.0" prefHeight="476.0" prefWidth="174.0" style="-fx-background-color: transparent;" text="There are no notes here" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="-3.0" />
+                        </children>
+                  <GridPane.margin>
+                     <Insets left="1.0" />
+                  </GridPane.margin>
+                  <padding>
+                     <Insets left="2.0" />
+                  </padding>
+                    </AnchorPane>
+                    <AnchorPane style="-fx-background-color: white;" GridPane.columnIndex="2">
+                        <children>
+                            <SplitPane dividerPositions="0.5" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                    <AnchorPane style="-fx-background-color: #d4d4d4;">
+                                        <children>
+                                            <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <children>
+                                       <AnchorPane prefHeight="46.0" prefWidth="229.0">
+                                          <children>
+                                             <Label fx:id="labelNoteTitle" prefHeight="51.0" prefWidth="229.0" style="-fx-background-color: White;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <font>
+                                                   <Font size="24.0" />
+                                                </font>
+                                                <padding>
+                                                   <Insets left="5.0" />
+                                                </padding>
+                                             </Label>
+                                          </children>
+                                          <VBox.margin>
+                                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                          </VBox.margin>
+                                       </AnchorPane>
+                                                    <Separator prefWidth="200.0" />
+                                                    <TextArea fx:id="textAreaNoteContents" onKeyTyped="#updateNoteContentChanged" promptText="Note content" VBox.vgrow="ALWAYS" />
+                                                </children>
+                                            </VBox>
+                                        </children>
+                                    </AnchorPane>
+                                    <AnchorPane>
+                                        <children>
+                                            <WebView fx:id="markdownWebView" layoutX="-13.0" prefHeight="371.0" prefWidth="211.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                 <ListView fx:id="listViewFilesList" prefHeight="75.0" prefWidth="218.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                                    <contextMenu>
+                                       <ContextMenu>
+                                         <items>
+                                             <MenuItem fx:id="downloadFile" mnemonicParsing="false" onAction="#downloadClicked" text="Download file" />
+                                             <MenuItem fx:id="deleteFile" mnemonicParsing="false" onAction="#deleteFileClicked" text="Delete file" />
+                                             <MenuItem fx:id="renameFile" mnemonicParsing="false" onAction="#renameFileClicked" text="Rename file" />
+                                             <MenuItem fx:id="insertReference" mnemonicParsing="false" onAction="#insertReferenceClicked" text="Insert reference" />
+
+                                         </items>
+                                       </ContextMenu>
+                                    </contextMenu>
+                                    <tooltip>
+                                       <Tooltip fx:id="fileContextMenu" text="%Item.fileContextMenu" />
+                                    </tooltip></ListView>
+                                 <Button fx:id="fileAddButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#fileAddButton" style="-fx-background-color: #b8b8b8;" text="%Item.fileAddButton" AnchorPane.bottomAnchor="85.0" AnchorPane.rightAnchor="5.0" />
+                                        </children>
+                                    </AnchorPane>
+                                </items>
+                            </SplitPane>
+                        </children>
+                    </AnchorPane>
+                </children>
+            </GridPane>
+        </children>
+    </AnchorPane>
+   <Separator prefWidth="200.0" />
+</VBox>

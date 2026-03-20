@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox onKeyPressed="#handleKeyPress" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.EditCollectionsCtrl">
+    <stylesheets> style.css </stylesheets>
+    <MenuBar VBox.vgrow="NEVER">
+        <Menu fx:id="collectionActionMenu" text="Edit current collection (Alt+E)">
+            <MenuItem fx:id="titleCollectionSC" onAction="#focusOnTitle" text="%Item.titleCollectionSC" />
+            <MenuItem fx:id="urlSC" onAction="#focusOnServer" text="%Item.urlSC" />
+            <MenuItem fx:id="collectionServerSC" onAction="#focusOnCollection" text="%Item.collectionServerSC" />
+            <MenuItem fx:id="addCreateCollectionSC" onAction="#saveCollection" text="%Item.addCreateCollectionSC" />
+        </Menu>
+        <Menu fx:id="otherShortcutsMenu" text="Extra actions (Alt+X)">
+            <MenuItem fx:id="listCollectionSC" onAction="#focusOnList" text="%Item.listCollectionSC" />
+            <MenuItem fx:id="newCollectionSC" onAction="#clearTextFields" text="%Item.newCollectionSC" />
+            <MenuItem fx:id="deleteCollectionSC" onAction="#removeCollection" text="%Item.deleteCollectionSC" />
+            <MenuItem fx:id="removeCollectionSC" onAction="#removeCollection" text="%Item.removeCollectionSC" />
+            <MenuItem fx:id="setDefaultSC" onAction="#setCollectionAsDefault" text="%Item.setDefaultSC" />
+            <MenuItem fx:id="closeWindowSC" onAction="#closeWindow" text="%Item.closeWindowSC" />
+        </Menu>
+    </MenuBar>
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="600.0">
+        <GridPane layoutX="80.0" layoutY="27.0" prefHeight="232.0" prefWidth="584.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="203.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="397.0" minWidth="10.0" prefWidth="397.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                <ListView fx:id="listViewCollectionList" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #e6e6e6;" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <contextMenu>
+               </contextMenu></ListView>
+                <Button fx:id="deleteCollectionButton" layoutX="32.0" layoutY="155.0" mnemonicParsing="false" onAction="#popUpForDeleteCollection" prefHeight="25.0" prefWidth="26.0" style="-fx-background-color: #b8b8b8;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="32.0">
+               <graphic>
+                  <FontIcon iconLiteral="fas-trash-alt" iconSize="14" text="" wrappingWidth="12.250000079472898" />
+               </graphic></Button>
+                <Button fx:id="createCollectionButton" layoutX="3.3333333333333335" layoutY="155.0" mnemonicParsing="false" onAction="#clearTextFields" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #b8b8b8;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="3.0">
+               <graphic>
+                  <FontIcon iconLiteral="fas-plus" iconSize="14" text="" wrappingWidth="10.250000079472784" />
+               </graphic></Button>
+                <Button fx:id="buttonSetDefault" layoutX="62.0" layoutY="155.0" mnemonicParsing="false" onAction="#setCollectionAsDefault" prefHeight="25.0" prefWidth="137.0" style="-fx-background-color: #b8b8b8;" text="Set as default" AnchorPane.bottomAnchor="5.0" />
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" GridPane.columnIndex="1">
+                <TextField fx:id="textFieldCollection" layoutX="172.0" layoutY="88.0" onKeyTyped="#updateCollectionStatus" prefWidth="149.0" />
+                <TextField fx:id="textFieldServer" layoutX="172.0" layoutY="50.0" onKeyTyped="#updateCollectionStatus" />
+                <TextField fx:id="textFieldTitle" layoutX="172.0" layoutY="13.0" onKeyTyped="#updateCollectionStatus" />
+                <Label fx:id="titleLabel" layoutX="41.0" layoutY="17.0" text="Title" />
+                <Label fx:id="serverLabel" layoutX="41.0" layoutY="54.0" text="Server" />
+                <Label fx:id="collectionLabel" layoutX="41.0" layoutY="92.0" text="Collection" />
+                <Label fx:id="statusLabel" layoutX="42.0" layoutY="129.0" text="Status" />
+                <Label fx:id="labelCurrentStatus" alignment="TOP_LEFT" layoutX="117.0" layoutY="129.0" prefHeight="50.0" prefWidth="191.0" wrapText="true" />
+                <Button fx:id="buttonSaveCollection" layoutX="285.0" layoutY="146.0" mnemonicParsing="false" onAction="#saveCollection" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #b8b8b8;" text="Save" />
+                <Label layoutX="94.0" layoutY="129.0" />
+            </AnchorPane>
+        </GridPane>
+    </AnchorPane>
+</VBox>

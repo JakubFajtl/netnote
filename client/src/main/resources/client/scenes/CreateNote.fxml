@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" prefHeight="142.0" prefWidth="416.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.scenes.CreateNoteCtrl">
+    <AnchorPane prefHeight="200.0" prefWidth="423.0">
+        <GridPane layoutX="-60.0" layoutY="-1.6" prefHeight="142.0" prefWidth="442.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="454.0" minWidth="10.0" prefWidth="104.39998779296874" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="464.0000244140625" minWidth="10.0" prefWidth="151.40003662109376" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="464.0000244140625" minWidth="10.0" prefWidth="120.19996337890626" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="110.39999237060547" minHeight="10.0" prefHeight="32.00000610351563" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="100.79999389648438" minHeight="10.0" prefHeight="43.40000610351563" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="95.19998016357422" minHeight="10.0" prefHeight="49.79999389648438" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <Button fx:id="createButton" mnemonicParsing="false" onAction="#createClicked" style="-fx-text-fill: #383838; -fx-background-color: #B8B8B8; -fx-background-radius: 5;" text="Create (ENTER)" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <GridPane.margin>
+               <Insets top="5.0" />
+            </GridPane.margin></Button>
+            <TextField fx:id="noteTitle" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                <GridPane.margin>
+                    <Insets />
+                </GridPane.margin>
+            </TextField>
+            <Label fx:id="titleLabel" text="Note title: " GridPane.columnSpan="3" />
+            <Label fx:id="collectionLabel" alignment="TOP_LEFT" text="Collection (Alt+C)" GridPane.rowIndex="2">
+            <GridPane.margin>
+               <Insets top="5.0" />
+            </GridPane.margin></Label>
+            <ComboBox fx:id="collectionChoice" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <GridPane.margin>
+               <Insets top="5.0" />
+            </GridPane.margin></ComboBox>
+        </GridPane>
+    </AnchorPane>
+</VBox>

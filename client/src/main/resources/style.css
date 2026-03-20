@@ -1,0 +1,18 @@
+.list-view .cell {
+    -fx-border-color: #717171;
+    -fx-border-width: 0px;
+    -fx-padding: 2px, 0px, 0px, 0px;
+}
+
+#listViewNotesList .cell {
+    -fx-padding: 0px;
+}
+
+.list-view .cell:empty {
+    -fx-background-color: #ededed;
+    -fx-border-color: transparent;
+}
+
+.list-view .cell:selected {
+    -fx-background-color: #b2c3da;
+}
